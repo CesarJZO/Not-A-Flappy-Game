@@ -1,9 +1,8 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Player
 {
-    public class BirdController : MonoBehaviour
+    public sealed class BirdController : MonoBehaviour
     {
         [SerializeField] private float jumpStrength;
 
@@ -17,9 +16,12 @@ namespace Player
         private void Update()
         {
             if (Input.GetMouseButtonDown(0))
-            {
-                _rigidbody2D.velocity = Vector2.up * jumpStrength;
-            }
+                Jump();
+        }
+
+        private void Jump()
+        {
+            _rigidbody2D.velocity = Vector2.up * jumpStrength;
         }
     }
 }
