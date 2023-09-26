@@ -6,6 +6,7 @@ namespace Obstacles
     {
         [SerializeField] private GameObject pipesPrefab;
         [SerializeField] private float spawnRate;
+        [SerializeField] private float height;
 
         private void Start()
         {
@@ -14,7 +15,15 @@ namespace Obstacles
 
         private void SpawnPipe()
         {
-            Instantiate(pipesPrefab, transform.position, Quaternion.identity);
+            // Mi punto de referencia
+            float center = transform.position.y;
+            // Obtengo un numero aleatorio con el desplazamiento
+            float yRandom = Random.Range(center - height, center + height);
+            // Genero mi vector de posicion
+            Vector3 position = new Vector3(transform.position.x, yRandom);
+
+            // Instancio en esa posicion
+            Instantiate(pipesPrefab, position, Quaternion.identity);
         }
     }
 }
