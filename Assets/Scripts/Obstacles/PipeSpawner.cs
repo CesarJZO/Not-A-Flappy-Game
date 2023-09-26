@@ -15,15 +15,9 @@ namespace Obstacles
 
         private void SpawnPipe()
         {
-            // Mi punto de referencia
-            float center = transform.position.y;
-            // Obtengo un numero aleatorio con el desplazamiento
-            float yRandom = Random.Range(center - height, center + height);
-            // Genero mi vector de posicion
-            Vector3 position = new Vector3(transform.position.x, yRandom);
+            float heightOffset = Random.Range(-height, height);
 
-            // Instancio en esa posicion
-            Instantiate(pipesPrefab, position, Quaternion.identity);
+            Instantiate(pipesPrefab, transform.position + Vector3.up * heightOffset, Quaternion.identity);
         }
     }
 }
