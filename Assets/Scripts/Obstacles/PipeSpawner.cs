@@ -1,3 +1,4 @@
+using Player;
 using UnityEngine;
 
 namespace Obstacles
@@ -11,13 +12,23 @@ namespace Obstacles
         private void Start()
         {
             InvokeRepeating(nameof(SpawnPipe), 0f, spawnRate);
+            BirdController.Instance.OnDie += OnPlayerDie;
+        }
+
+        private void OnPlayerDie()
+        {
+            CancelInvoke(nameof(SpawnPipe));
         }
 
         private void SpawnPipe()
         {
             float heightOffset = Random.Range(-height, height);
 
-            Instantiate(pipesPrefab, transform.position + Vector3.up * heightOffset, Quaternion.identity);
+            Instantiate(
+                original: pipesPrefab,
+                position: transform.position + Vector3.up * heightOffset,
+                rotation: Quaternion.identity
+            );
         }
     }
 }
