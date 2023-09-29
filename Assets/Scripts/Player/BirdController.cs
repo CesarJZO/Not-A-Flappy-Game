@@ -7,6 +7,9 @@ namespace Player
     {
         public static BirdController Instance { get; private set; }
 
+        /// <summary>
+        ///     Invoked once when bird collided with anything
+        /// </summary>
         public event Action OnDie;
 
         [SerializeField] private float jumpStrength;
@@ -17,6 +20,7 @@ namespace Player
 
         public bool Death => _death;
 
+        // Awake es SIEMPRE el primero que se llama, una sola vez.
         private void Awake()
         {
             Instance = this;
