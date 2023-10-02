@@ -11,8 +11,18 @@ namespace Obstacles
 
         private void Start()
         {
-            InvokeRepeating(nameof(SpawnPipe), 0f, spawnRate);
             BirdController.Instance.OnDie += OnPlayerDie;
+            GameManager.OnStart += OnGameStart;
+        }
+
+        private void OnDestroy()
+        {
+            GameManager.OnStart -= OnGameStart;
+        }
+
+        private void OnGameStart()
+        {
+            InvokeRepeating(nameof(SpawnPipe), 0f, spawnRate);
         }
 
         private void OnPlayerDie()

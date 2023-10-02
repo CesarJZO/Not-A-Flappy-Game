@@ -25,6 +25,22 @@ namespace Player
         {
             Instance = this;
             _rigidbody2D = GetComponent<Rigidbody2D>();
+            _rigidbody2D.bodyType = RigidbodyType2D.Static;
+        }
+
+        private void Start()
+        {
+            GameManager.OnStart += OnGameStart;
+        }
+
+        private void OnDestroy()
+        {
+            GameManager.OnStart -= OnGameStart;
+        }
+
+        private void OnGameStart()
+        {
+            _rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
         }
 
         private void Update()
@@ -39,7 +55,7 @@ namespace Player
 
             if (_death) return;
 
-            if (!Input.GetMouseButtonDown(0)) return;
+            if (!Input.GetKeyDown(KeyCode.Space)) return;
 
             Jump();
         }
