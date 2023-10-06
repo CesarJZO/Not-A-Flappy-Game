@@ -14,6 +14,7 @@ namespace Player
 
         [SerializeField] private float jumpStrength;
         [SerializeField] private float dieStrength;
+        [SerializeField] private LayerMask playableLayer;
 
         private Rigidbody2D _rigidbody2D;
         private bool _death = false;
@@ -44,8 +45,16 @@ namespace Player
             Jump();
         }
 
+        private bool IsInsidePlayableZone => Physics2D.OverlapCircle(
+            point: transform.position,
+            radius: transform.localScale.magnitude / 2f,
+            layerMask: playableLayer
+        );
+
         private void Jump()
         {
+            if (!IsInsidePlayableZone) return;
+
             _rigidbody2D.velocity = Vector2.up * jumpStrength;
         }
 
