@@ -21,6 +21,12 @@ namespace Player
 
         public bool Death => _death;
 
+        private bool IsInsidePlayableZone => Physics2D.OverlapCircle(
+            point: transform.position,
+            radius: transform.localScale.magnitude / 2f,
+            layerMask: playableLayer
+        );
+
         // Awake es SIEMPRE el primero que se llama, una sola vez.
         private void Awake()
         {
@@ -44,12 +50,6 @@ namespace Player
 
             Jump();
         }
-
-        private bool IsInsidePlayableZone => Physics2D.OverlapCircle(
-            point: transform.position,
-            radius: transform.localScale.magnitude / 2f,
-            layerMask: playableLayer
-        );
 
         private void Jump()
         {
