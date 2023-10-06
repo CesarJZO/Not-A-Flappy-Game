@@ -28,6 +28,13 @@ namespace Player
             _rigidbody2D = GetComponent<Rigidbody2D>();
         }
 
+        private bool TapInput()
+        {
+            if (Input.touchCount is 0) return false;
+            Touch touch = Input.GetTouch(0);
+            return touch.phase is TouchPhase.Began;
+        }
+
         private void Update()
         {
             // if (!_death)
@@ -40,9 +47,8 @@ namespace Player
 
             if (_death) return;
 
-            if (!Input.GetMouseButtonDown(0)) return;
-
-            Jump();
+            if (TapInput())
+                Jump();
         }
 
         private bool IsInsidePlayableZone => Physics2D.OverlapCircle(
