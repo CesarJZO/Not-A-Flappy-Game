@@ -6,7 +6,7 @@ public sealed class ScoreTrigger : MonoBehaviour
 {
     public static event Action OnPipePassed;
     
-    private void OnTriggerEnter2D(Collider2D collider)
+    private void OnTriggerExit2D(Collider2D collider)
     {
         if (!collider.CompareTag("Player")) return;
         

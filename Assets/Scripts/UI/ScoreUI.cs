@@ -3,23 +3,21 @@ using UnityEngine;
 
 public sealed class ScoreUI : MonoBehaviour
 {
-    [SerializeField] private GameObject scoreManager;
+    [SerializeField] private ScoreManager scoreManager;
     [SerializeField] private TextMeshProUGUI scoreText;
     
-    private void OnPipePassed()
+    private void OnScoreUpdated(ulong currentScore)
     {
-        ScoreManager m = scoreManager.GetComponent<ScoreManager>();
-        ulong score = m.Score;
-        scoreText.text = score.ToString();
+        scoreText.text = currentScore.ToString();
     }
 
     private void Start()
     {
-        ScoreTrigger.OnPipePassed += OnPipePassed;
+        scoreManager.OnScoreUpdated += OnScoreUpdated;
     }
 
     private void OnDestroy()
     {
-        ScoreTrigger.OnPipePassed -= OnPipePassed;
+        scoreManager.OnScoreUpdated -= OnScoreUpdated;
     }
 }
