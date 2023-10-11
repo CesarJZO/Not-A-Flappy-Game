@@ -13,6 +13,7 @@ public class MainMenuUI : MonoBehaviour
         playButton.onClick.AddListener(() => SceneManager.LoadScene(gameSceneName));
         exitButton.onClick.AddListener(() => Application.Quit());
         // OnPlay += OnPlayPerformed;
+        // playButton.onClick.AddListener(OnPlayPerformed);
         // OnPlay += () => { SceneManager.LoadScene(gameSceneName); };
     }
 }
