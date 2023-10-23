@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Management;
 
-public class GameOverUI : MonoBehaviour
+public class GameOverUI : MonoBehaviour, IToggleable
 {
     [SerializeField] private BirdController player;
 
@@ -25,19 +25,21 @@ public class GameOverUI : MonoBehaviour
             SceneManager.LoadScene(0);
         });
 
-        player.OnDie += Show;
-        // player.OnDie += OnBirdDie;
+        // player.OnDie += Show;
+        player.OnDie += OnBirdDie;
         Hide();
     }
 
     private void OnDestroy()
     {
-        player.OnDie -= Show;
-        // player.OnDie -= OnBirdDie;
+        // player.OnDie -= Show;
+        player.OnDie -= OnBirdDie;
     }
 
     private void OnBirdDie()
     {
+        // No recomendado, pasar a un GameOverManager
+        GameManager.Instance.CurrentState = GameState.GameOver;
         Show();
     }
 

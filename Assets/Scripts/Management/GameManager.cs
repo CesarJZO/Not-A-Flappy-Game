@@ -58,6 +58,6 @@ public class GameManager : MonoBehaviour
 
     private void GameOverUpdate()
     {
-
+        
     }
 }

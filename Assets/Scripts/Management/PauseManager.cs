@@ -1,12 +1,10 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PauseManager : MonoBehaviour
+public sealed class PauseManager : MonoBehaviour
 {
-    public event Action OnPause;
-    public event Action OnResume;
+    public static event Action OnPause;
+    public static event Action OnResume;
 
     private GameManager _gameManager;
     
@@ -18,6 +16,9 @@ public class PauseManager : MonoBehaviour
 
     private void OnPausePerformed()
     {
+        if (_gameManager.CurrentState is GameState.GameOver)
+            return;
+
         if (_gameManager.CurrentState is GameState.Playing)
         {
             _gameManager.CurrentState = GameState.Paused;
