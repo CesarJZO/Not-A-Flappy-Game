@@ -12,6 +12,8 @@ namespace Player
         /// </summary>
         public event Action OnDie;
 
+        public event Action OnJump;
+
         [SerializeField] private float jumpStrength;
         [SerializeField] private float dieStrength;
         [SerializeField] private LayerMask playableLayer;
@@ -56,6 +58,7 @@ namespace Player
             if (!IsInsidePlayableZone) return;
 
             _rigidbody2D.velocity = Vector2.up * jumpStrength;
+            OnJump?.Invoke();
         }
 
         private void OnCollisionEnter2D(Collision2D other)
